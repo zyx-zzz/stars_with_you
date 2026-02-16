@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>stars_with_you</title>
+  <link rel="stylesheet" href="/style.css" />
+  <!-- 补充少量关键样式，确保按钮/拼图基础显示 -->
+  <style>
+    /* 修复模块化脚本下的基础样式兼容 */
+    #exit-btn {
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #exit-btn:hover {
+      background: #ff7eb9 !important;
+    }
+    .extra-photo {
+      cursor: pointer;
+    }
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="sky">
+    <div id="lawn"></div> <!-- 草坪层 -->
+    <!-- 关键：.boy/.girl 必须在 #characters 内部 -->
+    <div id="characters">
+      <div class="boy">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+        <div class="leg left"></div>
+        <div class="leg right"></div>
+      </div>
+      <div class="girl">
+        <div class="head">
+          <div class="top"></div>
+        </div>
+        <div class="body"></div>
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+        <div class="leg left"></div>
+        <div class="leg right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="modal" class="hidden">
+    <div id="modal-content">
+      <p>✨ 第 <span id="star-number">1</span> 颗星星！</p>
+      <p id="custom-message"></p> <!-- 新增：专属情话 -->
+      <div id="puzzle-container"></div>
+      <img id="extra-photo" src="" alt="memories" class="hidden extra-photo" />
+      <!-- 保留你原有样式，仅把提示文字改为更友好的中英文兼容版 -->
+      <p id="photo-tip" class="hidden" style="color: #ff9dcf; margin-top: 10px;">Click for next photo~</p>
+      <!-- 保留你原有按钮样式，仅优化 hover 效果 -->
+      <button id="exit-btn" style="margin-top: 20px; padding: 8px 16px; background: #ff9dcf; color: white; border: none; border-radius: 4px; cursor: pointer;">Exit</button>
+    </div>
+  </div>
+  <!-- 保留 type="module"，适配模块化脚本 -->
+  <script type="module" src="/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+/* 像素字体 */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+  margin: 0;
+  background: #000;          
+  overflow: hidden;
+  font-family: 'Press Start 2P', cursive;
+  color: rgba(27, 42, 118, 0.322);              
+  font-size: 12px;
+}
+
+#sky {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: linear-gradient(to bottom, #000428, #093964);
+  z-index: 1; /* 修复：原代码此处是中文分号，改为英文分号 */
+}
+
+.star {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #fdfd24;         
+  border-radius: 50%;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  image-rendering: pixelated;
+  z-index: 999;
+  /* 新增：绑定闪烁动画，infinite 表示无限循环 */
+  animation: twinkle 4s ease-in-out infinite;
+  /* 初始透明度，配合动画 */
+  opacity: 0.8;
+}
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.8;  /* 正常亮度 */
+    transform: scale(1); /* 正常大小 */
+    box-shadow: 0 0 12px 4px rgba(255, 255, 255, 1);
+  }
+  50% {
+    opacity: 0.4;  /* 变暗（闪烁核心） */
+    transform: scale(0.8); /* 轻微缩小，更真实 */
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* 修复后的草坪样式：加!important强制生效，确保显示 */
+#lawn {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 20vh !important;
+  background: #0a2e16 !important;
+  opacity: 0.8 !important;
+  z-index: 2 !important; /* 层级高于星空，低于人物 */
+  /* 极简纹理保留 */
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 2px,
+    #0f4221 2px,
+    #0f4221 4px
+  ) !important;
+}
+
+#characters {
+  position: absolute !important;
+  bottom: 10vh !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 200px !important;
+  height: 180px !important;
+  opacity: 0.95 !important;
+  filter: drop-shadow(0 0 3px #ffffff) !important;
+  z-index: 3 !important;
+  animation: breathe 4s ease-in-out infinite !important;
+  overflow: visible !important; /* 允许线条溢出容器，显示四肢 */
+}
+
+/* 呼吸动画保留 */
+@keyframes breathe {
+  0%, 100% { 
+    transform: translateX(-50%) scale(1) !important; 
+  }
+  50% { 
+    transform: translateX(-50%) scale(1.02) !important; 
+  }
+}
+
+
+/* 男孩容器 */
+#characters .boy {
+  position: absolute;
+  left: 50px;
+  bottom: 20px;
+  width: 40px;
+  height: 80px; /* 头+身体+四肢高度 */
+}
+/* 男孩头 */
+#characters .boy .head {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+/* 男孩身体 */
+#characters .boy .body {
+  width: 2px;
+  height: 30px;
+  background: #fff;
+  margin: 0 auto;
+}
+/* 男孩腿 */
+#characters .boy .leg {
+  position: absolute;
+  bottom: 0;
+  width: 2px;
+  height: 20px;
+  background: #fff;
+}
+#characters .boy .leg.left {
+  left: 15px;
+}
+#characters .boy .leg.right {
+  right: 15px;
+}
+/* 男孩手臂 */
+#characters .boy .arm {
+  position: absolute;
+  top: 45px;
+  width: 2px;
+  height: 15px;
+  background: #fff;
+}
+#characters .boy .arm.left {
+  left: 10px;
+  transform: rotate(-30deg);
+}
+#characters .boy .arm.right {
+  right: 10px;
+  transform: rotate(30deg);
+}
+
+/* 女孩容器（同理，加头发） */
+#characters .girl {
+  position: absolute;
+  right: 50px;
+  bottom: 20px;
+  width: 40px;
+  height: 80px;
+}
+#characters .girl .head {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  position: relative;
+}
+/* 女孩头发 */
+#characters .girl .head::before,
+#characters .girl .head::after,
+#characters .girl .head .top {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background: #fff;
+}
+#characters .girl .head::before {
+  left: 10px;
+  top: -5px;
+}
+#characters .girl .head::after {
+  right: 10px;
+  top: -5px;
+}
+#characters .girl .head .top {
+  left: 50%;
+  transform: translateX(-50%);
+  top: -10px;
+}
+/* 女孩身体、腿、手臂和男孩一样 */
+#characters .girl .body {
+  width: 2px;
+  height: 30px;
+  background: #fff;
+  margin: 0 auto;
+}
+#characters .girl .leg {
+  position: absolute;
+  bottom: 0;
+  width: 2px;
+  height: 20px;
+  background: #fff;
+}
+#characters .girl .leg.left {
+  left: 15px;
+}
+#characters .girl .leg.right {
+  right: 15px;
+}
+#characters .girl .arm {
+  position: absolute;
+  top: 45px;
+  width: 2px;
+  height: 15px;
+  background: #fff;
+}
+#characters .girl .arm.left {
+  left: 10px;
+  transform: rotate(-30deg);
+}
+#characters .girl .arm.right {
+  right: 10px;
+  transform: rotate(30deg);
+}
+/* 强制子元素样式生效 */
+#characters .boy {
+  position: absolute !important;
+  left: 50px !important;
+  bottom: 20px !important;
+  width: 40px !important;
+  height: 80px !important;
+  z-index: 999 !important; /* 确保人物在最上层 */
+}
+#characters .girl {
+  position: absolute !important;
+  right: 50px !important;
+  bottom: 20px !important;
+  width: 40px !important;
+  height: 80px !important;
+  z-index: 999 !important;
+}
+#characters .boy .body,
+#characters .girl .body,
+#characters .boy .leg,
+#characters .girl .leg,
+#characters .boy .arm,
+#characters .girl .arm {
+  background: #fff !important;
+  width: 2px !important;
+}
+#characters .girl .head::before,
+#characters .girl .head::after,
+#characters .girl .head .top {
+  background: #fff !important;
+  width: 2px !important;
+  height: 10px !important;
+}
+
+/* 模态框基础样式 - 强制覆盖 */
+#modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.85) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 99999 !important; /* 确保在最顶层，比星星和人物都高 */
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 隐藏模态框的类 */
+#modal.hidden {
+  display: none !important;
+}
+
+/* 模态框内容容器 */
+#modal-content {
+  background: #1a1a3e !important;
+  padding: 30px !important;
+  border-radius: 10px !important;
+  text-align: center !important;
+  color: #fff !important;
+  box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.3) !important;
+  max-width: 400px !important;
+  width: 90% !important;
+  z-index: 100000 !important;
+}
+#modal-content p {
+  margin: 10px 0;
+  line-height: 1.5;
+}
+#star-number {
+  color: #fdfd24;
+  font-size: 16px;
+}
+#custom-message {
+  color: #ff9dcf;
+  margin: 20px 0;
+}
+/* 拼图容器 */
+#puzzle-container {
+  position: relative !important;
+  width: 300px !important;
+  height: 300px !important;
+  margin: 15px auto !important;
+  background: #f4ebeb !important;
+  border: 2px solid #fff !important;
+  overflow: hidden !important; /* 防止拼图块溢出 */
+}
+
+/* 拼图块 */
+.puzzle-piece {
+  width: 100px !important;  /* 300 / 3 = 100px */
+  height: 100px !important;
+  background-size: 300px 300px !important; /* 背景图尺寸和容器一致 */
+  background-repeat: no-repeat !important;
+  cursor: move !important;
+  position: absolute !important;
+  border: 1px solid rgba(255,255,255,0.5) !important;
+  box-sizing: border-box !important;
+  transition: none !important;
+}
+
+
+
+/* 大尺寸照片样式 */
+#extra-photo {
+  max-width: 400px !important; /* 放大照片宽度 */
+  width: 90% !important;
+  height: auto !important; /* 保持宽高比 */
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  margin: 15px auto;
+  display: block;
+  cursor: pointer; /* 鼠标悬浮显示手型 */
+}
+
+/* 提示文字样式 */
+#photo-tip {
+  font-size: 14px;
+  color: #ff9dcf !important;
+  margin: 10px 0 0 0 !important;
+  text-align: center;
+}
+
+/* 隐藏类（通用） */
+.hidden {
+  display: none !important;
+}
